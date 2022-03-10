@@ -1,0 +1,45 @@
+﻿<div class="row">
+    <div class="row col-4 ">
+        @for (int i = 1; i <= 10; i++)
+        {
+            <div class="row">
+                <label class="col-6">
+                    Number @i
+                </label>
+                <input type="number" class="form-control my-numbers col-6" />
+            </div>
+
+        }
+        <button type="button" class="btn-primary btn" onclick="sum()">Sow Sum!</button>
+    </div>
+    <div class="col-3">
+        <h1 id="result" class="text text-black ms-5"></h1>
+    </div>
+</div>
+
+@section Scripts{
+<script>
+    function sum (){
+        let arr=[];
+        $('.my-numbers').each(function(i,v){
+        if($(v).val()!==''){
+            arr.push(parseInt($(v).val()));
+        }
+        })
+    $.ajax('/Home/Sum', {
+        type: 'POST',
+        data: {arr:arr},
+        success: function (data, status, xhr) {
+      $('#result').text(data);
+        },
+        error:function (jqXhr, textStatus, errorMessage) {
+            console.error({ jqXhr, textStatus, errorMessage })
+        },
+        complete: function () {
+
+        }
+    });
+    }
+</script>
+    }
+
