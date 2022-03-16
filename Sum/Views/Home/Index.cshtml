@@ -13,9 +13,26 @@
         <button type="button" class="btn-primary btn" onclick="sum()">Sow Sum!</button>
     </div>
     <div class="col-3">
-        <h1 id="result" class="text text-black ms-5"></h1>
     </div>
 </div>
+<!-- Modal -->
+<div class="modal fade" id="uploadNewFileModal" tabindex="-1" role="dialog" aria-labelledby="uploadNewFileModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 id="result" class="text text-black ms-5"></h1>
+                <h5 class="modal-title" id="uploadNewFileModal">Sum Numbers</h5>
+            </div>
+            <div class="modal-body">
+                <input type="file" id="fileInput" multiple />
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
 
 @section Scripts{
 <script>
@@ -26,6 +43,7 @@
             arr.push(parseInt($(v).val()));
         }
         })
+         $('#uploadNewFileModal').modal('toggle')
     $.ajax('/Home/Sum', {
         type: 'POST',
         data: {arr:arr},
